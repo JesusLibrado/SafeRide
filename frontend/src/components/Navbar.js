@@ -174,7 +174,7 @@ export const Navbar = ()=> {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} >
-            <img src="logo.png" width="150px"/>
+            <img src="logo.png" width="150px" alt="logo"/>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
