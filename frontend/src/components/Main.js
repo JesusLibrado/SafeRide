@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState } from 'react'; 
 import { Grid, TextField, Card, CardHeader, CardContent, CardActions, Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Map from './Map';
@@ -28,7 +28,7 @@ const Main = () => {
 
     navigator.geolocation.getCurrentPosition(position => {
         setViewport({
-            latitude: position.coords.latitude,
+            latitude: position.coords.latitude+0.001,
             longitude: position.coords.longitude,
             zoom: 14,
             bearing: 0,
@@ -71,14 +71,3 @@ const Main = () => {
 }
 
 export default Main;
-
-// export default class Main extends React.Component{
-//     componentDidMount() {
-//         navigator.geolocation.getCurrentPosition(position => {
-//             this.setState({
-//                 latitude: position.coords.latitude,
-//                 longitude: position.coords.longitude
-//             });
-//         });
-//     }
-// }
