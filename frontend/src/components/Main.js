@@ -20,7 +20,7 @@ export default class Main extends React.Component{
     
     constructor(props) {
         super(props);
-        this.state = {latitude: 0, longitude: 0, zoom: 8};
+        this.state = {latitude: 0, longitude: 0, zoom: 14};
       }
 
     componentDidMount() {

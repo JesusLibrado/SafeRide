@@ -10,7 +10,7 @@ const Map = (props) =>{
     const [viewport, setViewport] = useState({
         latitude: 0,
         longitude: 0,
-        zoom: 3.5,
+        zoom: 8,
         bearing: 0,
         pitch: 0
     });
@@ -18,6 +18,7 @@ const Map = (props) =>{
     useEffect(()=>setViewport(props), [props]);
 
     const updateViewport = (object) =>{
+        console.log(object);
         setViewport(object);
     }
     
