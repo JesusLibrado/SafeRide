@@ -8,17 +8,16 @@ const TOKEN = 'pk.eyJ1IjoiYW1hZG8tbmVydm8iLCJhIjoiY2thNTF3NWZ6MThsajNtcjMxeG14Ym
 
 const Map = (props) =>{
     const [viewport, setViewport] = useState({
-        latitude: 0,
-        longitude: 0,
-        zoom: 8,
+        latitude: -19,
+        longitude: -10,
+        zoom: 15,
         bearing: 0,
         pitch: 0
     });
     
-    useEffect(()=>setViewport(props), [props]);
+    useEffect(()=>setViewport(props.viewport), [props.viewport]);
 
     const updateViewport = (object) =>{
-        console.log(object);
         setViewport(object);
     }
     
