@@ -26,12 +26,17 @@ const Map = (props) =>{
         <Card>
             <MapGL
                 {...viewport}
-                width={400}
+                width="100%"
                 height={400}
                 mapboxApiAccessToken={TOKEN}
                 onViewportChange={updateViewport}
             >
-                <Marker latitude={viewport.latitude} longitude={viewport.longitude} offsetLeft={-20} offsetTop={-10}>
+                <Marker 
+                    latitude={viewport.latitude} 
+                    longitude={viewport.longitude} 
+                    offsetLeft={0} 
+                    offsetTop={0}
+                >
                     <LocationOnIcon/>
                 </Marker>
                 {

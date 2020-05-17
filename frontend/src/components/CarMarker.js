@@ -11,7 +11,7 @@ const CarMarker = (props) => {
 
     return(
         <Marker latitude={latitude} longitude={longitude} offsetLeft={-20} offsetTop={-10}>
-            <DirectionsCarIcon color={"primary"}/>
+            <DirectionsCarIcon color={"primary"} fontSize={'small'}/>
         </Marker>
     );
 };

@@ -1,23 +1,12 @@
-import React, { useState } from 'react'; 
-import { Grid, TextField, Card, CardHeader, CardContent, CardActions, Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useRef, useEffect } from 'react';
 import Map from './Map';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      height: 140,
-      width: 100,
-    },
-    control: {
-      padding: theme.spacing(2),
-    },
-}));
+import Scheduler from './Scheduler';
+import { 
+    Grid
+} from "@material-ui/core";
   
 const Main = () => {
-
+    const [loading, setLoading] = useState(false);
     const [viewport, setViewport] = useState({
         latitude: 0,
         longitude: 0,
@@ -28,40 +17,42 @@ const Main = () => {
 
     navigator.geolocation.getCurrentPosition(position => {
         setViewport({
-            latitude: position.coords.latitude+0.001,
+            latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            zoom: 14,
+            zoom: 15,
             bearing: 0,
             pitch: 0
         });
     });
+
+    const timer = useRef();
+    
+    useEffect(() => {
+        return () => {
+          clearTimeout(timer.current);
+        };
+    }, []);
+
+    const search = (e) => {
+        e.preventDefault();
+        if (!loading) {
+            setLoading(true);
+            timer.current = setTimeout(() => {
+              setLoading(false);
+            }, 2000);
+        }
+    }
 
     return(
         <div>
             <Grid container spacing={2} style={{padding: 50}}>
                 <Grid item xs={12}>
                     <Grid container justify="center" spacing={8}>
-                        <Grid key={1} item>
+                        <Grid key={1} item md={6} lg={6} sm={12} xs={12}>
                             <Map viewport={viewport}/>
                         </Grid>
-                        <Grid key={2} item>
-                            <Card style={{width: 400}}>
-                                <CardHeader
-                                    title="Schedule"
-                                    subheader="Enter pick up information"
-                                />
-                                <CardContent>
-                                    <TextField id="pickup-address" label="Enter address" fullWidth/>
-                                </CardContent>
-                                <CardActions >
-                                <Button color="primary">
-                                    Ubicación actual
-                                </Button>
-                                <Button variant="contained" color="secondary">
-                                    Buscar
-                                </Button>
-                                </CardActions>
-                            </Card>
+                        <Grid key={2} item md={6} lg={6} sm={12} xs={12}>
+                            <Scheduler loading={loading} search={search}/>
                         </Grid>
                     </Grid>
                 </Grid>
