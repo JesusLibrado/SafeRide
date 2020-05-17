@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, TextField, Card, CardHeader, CardContent, CardActions, Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import {Map} from './Map';
+import Map from './Map';
 
 const useStyles = makeStyles((theme) => ({
     root: {
