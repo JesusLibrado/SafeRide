@@ -4,9 +4,6 @@ import MapGL, {Marker} from 'react-map-gl';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CarMarker from './CarMarker';
 
-const TOKEN = 'pk.eyJ1IjoiYW1hZG8tbmVydm8iLCJhIjoiY2thNTF3NWZ6MThsajNtcjMxeG14YmZ1ayJ9.WmStzO9ET_SlDhIxvmYjhQ';
-
-
 const Map = (props) =>{
     const [viewport, setViewport] = useState({
         latitude: 0,
@@ -28,7 +25,7 @@ const Map = (props) =>{
                 {...viewport}
                 width="100%"
                 height={400}
-                mapboxApiAccessToken={TOKEN}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 onViewportChange={updateViewport}
             >
                 <Marker 
