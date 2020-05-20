@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import Scheduler from './Scheduler';
 import { 
@@ -25,22 +25,10 @@ const Main = () => {
         });
     });
 
-    const timer = useRef();
-    
-    useEffect(() => {
-        return () => {
-          clearTimeout(timer.current);
-        };
-    }, []);
-
     const search = (e) => {
         e.preventDefault();
-        if (!loading) {
-            setLoading(true);
-            timer.current = setTimeout(() => {
-              setLoading(false);
-            }, 2000);
-        }
+        setLoading(true);
+        
     }
 
     return(
@@ -52,7 +40,7 @@ const Main = () => {
                             <Map viewport={viewport}/>
                         </Grid>
                         <Grid key={2} item md={6} lg={6} sm={12} xs={12}>
-                            <Scheduler loading={loading} search={search}/>
+                            <Scheduler loading={loading} search={search} coords={{latitude: viewport.latitude, longitude: viewport.longitude}}/>
                         </Grid>
                     </Grid>
                 </Grid>
