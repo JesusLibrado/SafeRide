@@ -1,5 +1,5 @@
 const Driver = require('../models/Driver');
-const studentHook = require('../hooks/student.hook');
+const studentHelper = require('../helpers/student.helper');
 
 module.exports = {
     getAll: async (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports = {
     },
     create: async (req, res, next) => {
         try{
-            let student = await studentHook.findStudent(req.body.student, 'id');
+            let student = await studentHelper.findStudent(req.body.student, 'id');
             if(!student) throw Error("Student not found");
             let newDriver = new Driver({
                 student: student._id,

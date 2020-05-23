@@ -1,5 +1,5 @@
 const Student = require('../models/Student');
-const universityHooks = require('../hooks/university.hook');
+const universityHelpers = require('../helpers/university.helper');
 
 module.exports = {
     getAll: async (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports = {
     },
     create: async (req, res, next) => {
         try{
-            let uni = await universityHooks.findUniversity(req.body.university, 'id');
+            let uni = await universityHelpers.findUniversity(req.body.university, 'id');
             if(!uni) throw Error("University not found");
             let newStudent = new Student({
                 name: req.body.name,
