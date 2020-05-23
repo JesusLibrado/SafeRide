@@ -28,7 +28,9 @@ var server = http.createServer(app);
  * Create MongoDB connection.
  */
 
-const Mongoose = require('mongoose')
+const Mongoose = require('mongoose');
+
+//Mongoose.connection.dropDatabase();
 
 Mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(params=>console.log(`Database connection created [env:${process.env.NODE_ENV}] \nAvailable models:\n`, params.models))
