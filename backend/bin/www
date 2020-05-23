@@ -25,6 +25,17 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Create MongoDB connection.
+ */
+
+const Mongoose = require('mongoose')
+
+Mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(params=>console.log(`Database connection created [env:${process.env.NODE_ENV}] \nAvailable models:\n`, params.models))
+.catch(err=>console.log("Couldn't connect to database", err));
+
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
