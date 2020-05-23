@@ -11,11 +11,18 @@ const newSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, 'Email is required']
+    required: [true, 'Email is required'],
+    unique: true
   },
   phoneNumber: {
     type: String,
-    required: [true, 'Phone number is required']
+    required: [true, 'Phone number is required'],
+    unique: true
+  },
+  university: {
+    type: Schema.Types.ObjectId,
+    ref: 'University',
+    required: [true, 'Indicate students university']
   }
 }, {
   timestamps: {

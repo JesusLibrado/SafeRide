@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 const newSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'University official name is required']
+        required: [true, 'University official name is required'],
+        unique: true
     },
     shortName: {
-        type: String
+        type: String,
+        unique: true
     },
     domainNames: {
         type: [String],
@@ -17,7 +19,7 @@ const newSchema = new mongoose.Schema({
     },
     location: {
         type: Schema.Types.ObjectId,
-        ref: 'GeoPoint'
+        ref: 'Location'
     }
 },{
     timestamps: {

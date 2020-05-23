@@ -8,11 +8,12 @@ const newSchema = new mongoose.Schema({
     },
     plates: {
         type: String,
-        required: [true, 'Plate number is required']
+        required: [true, 'Plate number is required'],
+        unique: true
     },
     carModel: {
         type: String,
-        required: [true, 'Car model is required']
+        //required: [true, 'Car model is required']
     }
 },{
     timestamps: {
