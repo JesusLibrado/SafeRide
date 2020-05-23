@@ -1,4 +1,5 @@
 const Student = require('../models/Student');
+const universityHooks = require('../hooks/university.hook');
 
 module.exports = {
     getAll: async (req, res, next) => {
@@ -10,7 +11,10 @@ module.exports = {
         }
     },
     create: async (req, res, next) => {
+        let uni = await universityHooks.findUniversity(req.body.university, 'id');
+        console.log("uni", uni);
         let newStudent = new Student(req.body);
+        console.log("student", newStudent);
         try{
             let student = await newStudent.save();
             res.json(student);
