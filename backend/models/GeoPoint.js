@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
 const newSchema = new mongoose.Schema({
-    latitude: {
-        type: Number,
-        required: [true, 'Latittude is required']
-    },
-    longitude: {
-        type: Number,
-        required: [true, 'Longitude is required']
-    }
+    type: {
+        type: String,
+        enum: ['Point'],
+        required: [true, "Type 'point' is required"]
+      },
+      coordinates: {
+        type: [Number],
+        required: [true, "Coordinates: [] are missing"]
+      }
 },{
     timestamps: {
         createdAt: 'created_at',

@@ -6,7 +6,7 @@ module.exports = {
             let students = await Student.find();
             res.json(students);
         }catch(err){
-            res.json({error: err, msg: "No ha sido posible obtener la lista de estudiantes"});
+            res.json({error: err, msg: "Couldn't retrieve students list"});
         }
     },
     create: async (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports = {
             let student = await newStudent.save();
             res.json(student);
         }catch(err){
-            res.json({error: err, msg: "No ha sido posible registrar al estudiante"});
+            res.json({error: err, msg: "Student registration is not available"});
         }
     }
 }
