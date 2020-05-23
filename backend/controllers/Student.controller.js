@@ -13,6 +13,7 @@ module.exports = {
     create: async (req, res, next) => {
         try{
             let uni = await universityHooks.findUniversity(req.body.university, 'id');
+            if(!uni) throw Error("University not found");
             let newStudent = new Student({
                 name: req.body.name,
                 surname: req.body.surname,

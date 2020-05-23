@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const newSchema = new mongoose.Schema({
     student: {
         type: Schema.Types.ObjectId,
-        ref: 'Student'
+        ref: 'Student',
+        required: [true, 'Indicate student']
     },
     plates: {
         type: String,

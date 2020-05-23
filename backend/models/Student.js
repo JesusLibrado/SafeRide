@@ -31,5 +31,7 @@ const newSchema = new mongoose.Schema({
   }
 });
 
+newSchema.virtual('fullName').get(function(){return `${this.name} ${this.surname}`;});
+
 const Student = mongoose.model('Student', newSchema);
 module.exports = Student;
