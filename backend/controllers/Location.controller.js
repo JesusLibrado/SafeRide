@@ -22,7 +22,9 @@ module.exports = {
             res.json({error: err, msg: "Location registration failed"});
         }
     },
-    get: async (req, res, next) => {
-        console.log(req.param);
+    getByName: async (req, res, next) => {
+        console.log(req);
+        let location = await locationHelper.findLocationByName(req.params.name, 'location');
+        res.json(location);
     }
 }
