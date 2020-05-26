@@ -30,6 +30,11 @@ module.exports = {
         }
     },
     getById: async (req, res, next) => {
-        
+        try{
+            let trip = await Trip.findById(req.params.trip_id).populate('driver').populate('stops');
+            res.json(trip);
+        }catch(err){
+            res.json({error: err, msg: "Trip not found"});
+        }
     }
 }
