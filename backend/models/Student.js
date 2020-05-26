@@ -23,11 +23,21 @@ const newSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'University',
     required: [true, 'Indicate students university']
+  },
+  currentTrip: {
+    type: Schema.Types.ObjectId,
+    ref: 'Trip'
   }
 }, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
+  },
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
   }
 });
 

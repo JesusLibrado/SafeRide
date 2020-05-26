@@ -19,7 +19,7 @@ const newSchema = new mongoose.Schema({
         type: Number,
         //required: [true, 'Postal code is missing']
     },
-    location: {
+    geopoint: {
         type: GeoPoint.schema,
         required: [true, "GeoPoint is required"]
     }
