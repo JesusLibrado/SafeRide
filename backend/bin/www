@@ -32,7 +32,7 @@ const Mongoose = require('mongoose');
 
 Mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(params=>console.log(`Database connection created [env:${process.env.NODE_ENV}] \nAvailable models:\n`, params.models))
-.catch(err=>console.log("Couldn't connect to database", err));
+.catch(err=>console.log("Database connection refused", err));
 
 //Mongoose.connection.dropDatabase().then(res=>console.log("Database dropped", res));
 
