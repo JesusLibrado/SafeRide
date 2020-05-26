@@ -25,5 +25,28 @@ module.exports = {
             console.log(err);
             res.json({error: err, msg: "Driver registration unsuccessful"});
         }
+    },
+    getDriver: async (req, res, next) => {
+        try{
+            let driver = await Driver.findById(req.params.driver_id)
+            .populate('student');
+            res.json(driver);
+        }catch(err) {
+            res.json({error: err, msg: "Couldn't retrieve driver's university"});
+        }
+    },
+    getUniversity: async (req, res, next) => {
+        try{
+            let driver = await Driver.findById(req.params.driver_id)
+            .populate({path: 'student', 
+                populate: {
+                    path: 'university', 
+                    select: 'name shortName location'
+                }
+            });
+            res.json(driver.student.university);
+        }catch(err) {
+            res.json({error: err, msg: "Couldn't retrieve driver's university"});
+        }
     }
 }
