@@ -4,7 +4,9 @@ const universityHelpers = require('../helpers/university.helper');
 module.exports = {
     getAll: async (req, res, next) => {
         try{
-            let students = await Student.find().populate('university').populate('currentTrip');
+            let students = await Student.find()
+            .populate('university')
+            .populate('currentTrip');
             res.json(students);
         }catch(err){
             res.json({error: err, msg: "Couldn't retrieve students list"});

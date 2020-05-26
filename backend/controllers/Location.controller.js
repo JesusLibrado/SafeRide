@@ -15,7 +15,7 @@ module.exports = {
         console.log(req.body);
         try{
             let point = new GeoPoint({type: 'GeoPoint', coordinates: req.body.coordinates});
-            let newLocation = new Location({name: req.body.name, location: point});
+            let newLocation = new Location({name: req.body.name, geopoint: point});
             let location = await newLocation.save();
             res.json(location);
         }catch(err){
