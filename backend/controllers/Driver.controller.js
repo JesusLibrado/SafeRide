@@ -26,7 +26,7 @@ module.exports = {
             res.json({error: err, msg: "Driver registration unsuccessful"});
         }
     },
-    getDriver: async (req, res, next) => {
+    getById: async (req, res, next) => {
         try{
             let driver = await Driver.findById(req.params.driver_id)
             .populate('student');

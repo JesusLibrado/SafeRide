@@ -4,7 +4,7 @@ var DriverController = require('../controllers/Driver.controller');
 
 router.get('/', DriverController.getAll);
 router.get('/:driver_id/university', DriverController.getUniversity);
-router.get('/:driver_id', DriverController.getDriver);
+router.get('/:driver_id', DriverController.getById);
 router.post('/', DriverController.create);
 
 module.exports = router; 

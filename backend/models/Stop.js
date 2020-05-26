@@ -5,6 +5,7 @@ const newSchema = new mongoose.Schema({
     number: {
         type: Number,
         required: [true, 'Stop priority number required'],
+        min: 1
     },
     location: {
         type: Location.schema
