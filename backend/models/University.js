@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Location = require('./Location');
 const Schema = mongoose.Schema;
 
 const newSchema = new mongoose.Schema({
@@ -18,8 +19,7 @@ const newSchema = new mongoose.Schema({
         }, 'At least one domain name is required']
     },
     location: {
-        type: Schema.Types.ObjectId,
-        ref: 'Location'
+        type: Location.schema
     }
 },{
     timestamps: {
