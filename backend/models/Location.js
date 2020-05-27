@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const GeoPoint = require('./GeoPoint');
+const Point = require('./Point');
 
 const newSchema = new mongoose.Schema({
     name: {
@@ -19,9 +19,9 @@ const newSchema = new mongoose.Schema({
         type: Number,
         //required: [true, 'Postal code is missing']
     },
-    geopoint: {
-        type: GeoPoint.schema,
-        required: [true, "GeoPoint is required"]
+    location: {
+        type: Point.schema,
+        required: [true, "Point is required"]
     }
 },{
     timestamps: {
