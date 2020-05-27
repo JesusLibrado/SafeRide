@@ -20,6 +20,6 @@ exports.getLocationsNearName = async (location_name) => {
     let location = await this.findLocationByName(location_name, 'location');
     let nearLocations = await Location.find()
     .where('location')
-    .within({ center: location.location.coordinates, radius: 1})
+    .within({ center: location.location.coordinates, radius: 0.02});
     return nearLocations;
 }
