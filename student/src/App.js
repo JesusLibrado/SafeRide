@@ -6,6 +6,7 @@ import {
   Switch
 } from "react-router-dom";
 import Main from './components/Main';
+import Students from './components/Students';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Navbar/>
       <Switch>
         <Route path="/">
-          <Main />
+          {/* <Main /> */}
+          <Students/>
         </Route>
         <Route path="/request">
 
