@@ -13,5 +13,10 @@ exports.getDriverUniversity = async (id, uni_fields='') =>{
             select: uni_fields
         }
     });
-    return driver.student.university;
+    if(driver) {
+        return driver.student.university;
+    }
+    else {
+        return null;
+    }
 }
