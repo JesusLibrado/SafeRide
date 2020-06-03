@@ -1,6 +1,7 @@
 const Trip = require('../models/Trip');
 const driverHelper =require('../helpers/driver.helper');
 const stopHelper =require('../helpers/stop.helper');
+const studentHelper=require('../helpers/student.helper');
 
 module.exports = {
     getAll: async (req, res, next) => {
@@ -36,5 +37,14 @@ module.exports = {
         }catch(err){
             res.json({error: err, msg: "Trip not found"});
         }
+    },
+    requestToJoin: async (req, res, next) => {
+        console.log(req.params);
+        let trip_id = await Trip.findById(req.params.trip_id, 'id');
+        let student_id = await studentHelper.findStudentById(req.params.student_id, 'id');
+        let passengers_array = [];
+        passengers_array.push(student_id);
+        await Trip.findByIdAndUpdate(trip_id, {passengers: passengers_array});
+        console.log(await Trip.findById(trip_id, 'passengers').populate('passengers'));
     }
 }
