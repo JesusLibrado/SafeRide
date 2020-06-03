@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import axios from 'axios'
 
-const Students = (props)=>{
+const Students = ()=>{
     const [students, setStudents] = useState([]);
 
     useEffect(()=>{

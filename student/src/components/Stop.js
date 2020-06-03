@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Marker} from 'react-map-gl';
 import DirectionsCarIcon from '@material-ui/icons/DirectionsCar';
 
-const CarMarker = (props) => {
+const Stop = (props) => {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
 
@@ -16,4 +16,4 @@ const CarMarker = (props) => {
     );
 };
 
-export default CarMarker;
+export default Stop;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from "@material-ui/core";
 import MapGL, {Marker} from 'react-map-gl';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import CarMarker from './CarMarker';
+import Stop from './Stop';
 
 const Map = (props) =>{
     const [viewport, setViewport] = useState({
@@ -12,8 +12,14 @@ const Map = (props) =>{
         bearing: 0,
         pitch: 0
     });
+
+    const [me, setMe] = useState({
+        latitude: 0,
+        longitude: 0
+    });
     
     useEffect(()=>setViewport(props.viewport), [props.viewport]);
+    useEffect(()=>setMe(props.me), [props.me]);
 
     const updateViewport = (object) =>{
         setViewport(object);
@@ -29,8 +35,8 @@ const Map = (props) =>{
                 onViewportChange={updateViewport}
             >
                 <Marker 
-                    latitude={viewport.latitude} 
-                    longitude={viewport.longitude} 
+                    latitude={me.latitude} 
+                    longitude={me.longitude} 
                     offsetLeft={0} 
                     offsetTop={0}
                 >
@@ -38,7 +44,7 @@ const Map = (props) =>{
                 </Marker>
                 {
                     [1,2,3].map((n)=>
-                        <CarMarker 
+                        <Stop
                             latitude={viewport.latitude+(n*0.001)} 
                             longitude={viewport.longitude}
                             key={n}
