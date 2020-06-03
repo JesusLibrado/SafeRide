@@ -20,4 +20,6 @@ const params = {
     }
 };
   
-export const Default = () => <Map {...params}/>
+export const Default = () => <Map {...params} />
+
+export const Stops = () => <Map {...params} />
