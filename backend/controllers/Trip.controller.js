@@ -40,11 +40,28 @@ module.exports = {
     },
     requestToJoin: async (req, res, next) => {
         console.log(req.params);
-        let trip_id = await Trip.findById(req.params.trip_id, 'id');
-        let student_id = await studentHelper.findStudentById(req.params.student_id, 'id');
-        let passengers_array = [];
-        passengers_array.push(student_id);
-        await Trip.findByIdAndUpdate(trip_id, {passengers: passengers_array});
-        console.log(await Trip.findById(trip_id, 'passengers').populate('passengers'));
+
+        Trip.findById(req.params.trip_id, 'id');
+        let student = await studentHelper.findStudentById(req.params.student_id, 'id');
+
+
+        console.log(trip);
+        console.log(student);
+
+        console.log(trip.availableSeats);
+        res.json(true);
+        return
+
+        if(trip.availableSeats <= 0) {
+            return res.json({error: Error('availableSeats <= 0'), msg: "No more seats available on this trip"});
+        }
+
+        await Trip.update({'_id': req.params.trip_id}, {$push: {passengers: req.params.student_id}})
+        await Trip.update({'_id': req.params.trip_id}, {$inc: {availableSeats: -1}})
+
+        
+        trip = await Trip.findById(req.params.trip_id, 'id').populate();
+        console.log(trip);
+        res.json(trip);
     }
 }
