@@ -14,13 +14,13 @@ module.exports = {
     },
     create: async (req, res, next) => {
         let driver_id = await driverHelper.getDriverById(req.body.driver_id, 'id');
-        let university = await driverHelper.getDriverUniversity(driver_id, 'location');
+        let university = await driverHelper.getDriverUniversity(req.body.driver_id, 'location');
         if(!university) {res.json({error: "University has no location set"}); return;}
         let uni_stop = await stopHelper.getNewStop(university.location, 1);
         console.log(uni_stop);
         try{
             let newTrip = new Trip({
-                driver: driver_id,
+                driver: req.body.driver_id,
                 availableSeats: req.body.availableSeats
             });
             newTrip.stops.push(uni_stop);

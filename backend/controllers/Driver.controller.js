@@ -12,7 +12,7 @@ module.exports = {
     },
     create: async (req, res, next) => {
         try{
-            let student = await studentHelper.findStudent(req.body.student, 'id');
+            let student = await studentHelper.findStudent(req.body.student, 'email');
             if(!student) throw Error("Student not found");
             let newDriver = new Driver({
                 student: student._id,
