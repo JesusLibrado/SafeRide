@@ -1,7 +1,21 @@
 const Trip = require('../models/Trip');
+const Student = require('../models/Student');
+const Driver = require('../models/Driver');
+const Stop = require('../models/Stop');
 const driverHelper =require('../helpers/driver.helper');
 const stopHelper =require('../helpers/stop.helper');
 const studentHelper=require('../helpers/student.helper');
+
+// Helper function to check if an array of Mongoose ObjectIds contain an element
+function contains(arr, elem) {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i].toString() === elem) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 module.exports = {
     getAll: async (req, res, next) => {
@@ -41,27 +55,36 @@ module.exports = {
     requestToJoin: async (req, res, next) => {
         console.log(req.params);
 
-        Trip.findById(req.params.trip_id, 'id');
-        let student = await studentHelper.findStudentById(req.params.student_id, 'id');
+        Trip.findOne({'_id': req.params.trip_id}, (err, trip) => {
+            console.log(trip);
 
+            if(err || !trip) {
+                return res.json({error: err, msg: 'Could not find trip'});
+            }
 
-        console.log(trip);
-        console.log(student);
+            Student.findOne({'_id': req.params.student_id}, (err, student) => {
+                console.log(student);
 
-        console.log(trip.availableSeats);
-        res.json(true);
-        return
+                if(err || !student) {
+                    return res.json({error: err, msg: 'Could not find student'});
+                }
 
-        if(trip.availableSeats <= 0) {
-            return res.json({error: Error('availableSeats <= 0'), msg: "No more seats available on this trip"});
-        }
+                if(trip.availableSeats <= 0) {
+                    return res.json({error: Error('availableSeats <= 0'), msg: "No more seats available on this trip"});
+                }
 
-        await Trip.update({'_id': req.params.trip_id}, {$push: {passengers: req.params.student_id}})
-        await Trip.update({'_id': req.params.trip_id}, {$inc: {availableSeats: -1}})
+                if(contains(trip.passengers, req.params.student_id)) {
+                    // Silently succeed with no other effect
+                    return res.json(trip);
+                }
 
-        
-        trip = await Trip.findById(req.params.trip_id, 'id').populate();
-        console.log(trip);
-        res.json(trip);
+                trip.passengers.push(req.params.student_id);
+                trip.availableSeats -= 1;
+
+                trip.save();
+
+                res.json(trip);
+            });
+        });
     }
 }

@@ -6,7 +6,7 @@ exports.getDriverById = async (id, fields='') =>{
 }
 
 exports.getDriverUniversity = async (id, uni_fields='') =>{
-    let driver = await Driver.findOne({"student": id})
+    let driver = await Driver.findOne({"_id": id})
     .populate('student')
     .populate('university');
     if(driver) {
