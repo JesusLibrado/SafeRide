@@ -1,0 +1,395 @@
+{
+    "info": {
+        "_postman_id": "f503cba0-4024-464f-bdcd-73abc8d686b0",
+        "name": "SafeRide",
+        "description": "**Safe Ride API**\nSet of requests for Lab web final project\nCollection with requests:\n* Post\n* Get\n* Update\n* Delete",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Students GET all",
+            "_postman_id": "241633ec-f9db-4162-8839-9d46407b3038",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/students",
+                "description": "**Get all students**\nNo params"
+            },
+            "response": []
+        },
+        {
+            "name": "Student POST create",
+            "_postman_id": "45b19133-fa91-4369-be27-c0d2ff615079",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "name",
+                            "value": "Juan",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "surname",
+                            "value": "Sanchez",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "phoneNumber",
+                            "value": "55578905763",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "email",
+                            "value": "j.sanchez@tec.mx",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "university",
+                            "value": "ITESM",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "name",
+                            "value": "Pedro",
+                            "type": "text"
+                        },
+                        {
+                            "key": "surname",
+                            "value": "Contreras",
+                            "type": "text"
+                        },
+                        {
+                            "key": "phoneNumber",
+                            "value": "2372362712",
+                            "type": "text"
+                        },
+                        {
+                            "key": "email",
+                            "value": "p.contreras@itesm.mx",
+                            "type": "text"
+                        },
+                        {
+                            "key": "university",
+                            "value": "ITESM",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/students",
+                "description": "**Create a student**\nParams:\n* name: String!\n* surname: String\n* email: String!\n* phoneNumber: String!"
+            },
+            "response": []
+        },
+        {
+            "name": "Universities GET all",
+            "_postman_id": "1ad422b0-6600-4130-ab3d-98ae5dbb54e6",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/universities"
+            },
+            "response": []
+        },
+        {
+            "name": "University POST create",
+            "_postman_id": "e7b6cd5a-5e6b-48f7-be69-6c30fa99e8f9",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "name",
+                            "value": "Instituto Tecnol\u00f3gico y de Estudios Superiores de Monterrey",
+                            "type": "text"
+                        },
+                        {
+                            "key": "shortName",
+                            "value": "ITESM",
+                            "type": "text"
+                        },
+                        {
+                            "key": "domainNames",
+                            "value": "tec.mx",
+                            "type": "text"
+                        },
+                        {
+                            "key": "domainNames",
+                            "value": "itesm.mx",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/universities",
+                "description": "**Create a new Uni**\nParams:\n* name: String\n* shortName: String\n* domainNames: [String]\n* location: Location"
+            },
+            "response": []
+        },
+        {
+            "name": "University PUT updateLocation",
+            "_postman_id": "3b9dcae0-b292-4247-9bd0-c0d0ac5ee23c",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "locationName",
+                            "value": "tec de monterrey campus puebla",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/universities\/ITESM\/updateLocation"
+            },
+            "response": []
+        },
+        {
+            "name": "Drivers GET all",
+            "_postman_id": "38933dce-b4af-4eae-8eb9-41cc58c25b26",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/drivers"
+            },
+            "response": []
+        },
+        {
+            "name": "Driver GET university",
+            "_postman_id": "06532a64-4dd3-4f4b-9f35-2750bccaa49d",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/drivers\/5ecd69293f8b52268a49e7b8\/university"
+            },
+            "response": []
+        },
+        {
+            "name": "Drivers GET byId",
+            "_postman_id": "230c1a82-0beb-4312-9916-c715cfd17e08",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/drivers\/5ecd69293f8b52268a49e7b8"
+            },
+            "response": []
+        },
+        {
+            "name": "Driver POST create",
+            "_postman_id": "98ecfa05-5d6d-41bd-994c-f1d900f50faa",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "student",
+                            "value": "j.sanchez@tec.mx",
+                            "type": "text"
+                        },
+                        {
+                            "key": "plates",
+                            "value": "XLM6787",
+                            "type": "text"
+                        },
+                        {
+                            "key": "carModel",
+                            "value": "Nissan Versa",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/drivers"
+            },
+            "response": []
+        },
+        {
+            "name": "Locations GET all",
+            "_postman_id": "900bfbe4-d517-4f97-85c4-4226422c8db0",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/locations"
+            },
+            "response": []
+        },
+        {
+            "name": "Locations GET by name",
+            "_postman_id": "9a3d625c-9dfd-4e54-bbf5-aff8aa7d284e",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/locations\/tec%20de%20monterrey%20campus%20puebla\/find",
+                "description": "**Find locations** Params:\n* name: String"
+            },
+            "response": []
+        },
+        {
+            "name": "Location GET coordinates\/near",
+            "_postman_id": "10bf037b-e2b2-4118-b687-b8a8f419e5d3",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}{{base}}\/locations\/near?longitude=-98.243571&latitude=19.023840",
+                    "host": [
+                        "{{host}}{{base}}"
+                    ],
+                    "path": [
+                        "locations",
+                        "near"
+                    ],
+                    "query": [
+                        {
+                            "key": "longitude",
+                            "value": "-98.243571"
+                        },
+                        {
+                            "key": "latitude",
+                            "value": "19.023840"
+                        },
+                        {
+                            "key": "location_name",
+                            "value": "tec de monterrey campus puebla",
+                            "disabled": true
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Location POST create",
+            "_postman_id": "cd743031-036a-4bc2-8f1c-9a18c1122561",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "name",
+                            "value": "tec de monterrey campus puebla",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "coordinates",
+                            "value": "-98.24204531850864",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "coordinates",
+                            "value": "19.019083327632828",
+                            "type": "text",
+                            "disabled": true
+                        },
+                        {
+                            "key": "name",
+                            "value": "ibero puebla",
+                            "type": "text"
+                        },
+                        {
+                            "key": "coordinates",
+                            "value": "-98.240776",
+                            "type": "text"
+                        },
+                        {
+                            "key": "coordinates",
+                            "value": "19.032422",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/locations"
+            },
+            "response": []
+        },
+        {
+            "name": "Trips GET all",
+            "_postman_id": "935cba01-7642-4c81-b995-ddbf6ff2327f",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/trips"
+            },
+            "response": []
+        },
+        {
+            "name": "Trip GET byId",
+            "_postman_id": "16dec841-6a63-4492-a838-248778cd24e1",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/trips\/5ecda49d2a2af951b3659254"
+            },
+            "response": []
+        },
+        {
+            "name": "Trip POST create",
+            "_postman_id": "2196e9bb-7250-49fa-9aed-e36be692623d",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "driver_id",
+                            "value": "5ed7078c58090059ade635d4",
+                            "type": "text"
+                        },
+                        {
+                            "key": "availableSeats",
+                            "value": "4",
+                            "type": "text"
+                        }
+                    ],
+                    "options": {
+                        "urlencoded": {}
+                    }
+                },
+                "url": "{{host}}{{base}}\/trips"
+            },
+            "response": []
+        },
+        {
+            "name": "Trip POST join to trip",
+            "_postman_id": "5a820748-819e-4082-ab3c-b2f6dfd06d78",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}{{base}}\/trips\/5ed70af758090059ade635d6\/join\/5ed7078c58090059ade635d4"
+            },
+            "response": []
+        }
+    ],
+    "protocolProfileBehavior": {}
+}
