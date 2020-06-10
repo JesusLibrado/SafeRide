@@ -9,7 +9,7 @@ const Map = (props) =>{
     const [viewport, setViewport] = useState({
         latitude: 0,
         longitude: 0,
-        zoom: 15,
+        zoom: 18,
         bearing: 0,
         pitch: 0
     });
@@ -21,7 +21,7 @@ const Map = (props) =>{
     
     useEffect(()=>setViewport(props.viewport), [props.viewport]);
     useEffect(()=>setMe(props.me), [props.me]);
-    useEffect(()=>console.log("markers",props.markers), [props.markers]);
+    useEffect(()=>setMarkers(props.markers), [props.markers]);
 
     const updateViewport = (object) =>{
         setViewport(object);
@@ -45,11 +45,11 @@ const Map = (props) =>{
                     <LocationOnIcon/>
                 </Marker>
                 {
-                    markers.map((n)=>
+                    markers.map((marker)=>
                         <Stop
-                            latitude={viewport.latitude+(n*0.001)} 
-                            longitude={viewport.longitude}
-                            key={n}
+                            latitude={marker.latitude} 
+                            longitude={marker.longitude}
+                            key={marker.name}
                         />)
                 }
             </MapGL>
