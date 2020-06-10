@@ -3,7 +3,7 @@ import pusher from '../pusher';
 import { makeStyles } from '@material-ui/core/styles';
 import { green, grey } from '@material-ui/core/colors';
 import {
-   Button
+   Button, CircularProgress
 } from '@material-ui/core';
 import axios from 'axios';
 
@@ -34,9 +34,7 @@ const useStyles = makeStyles((theme) => ({
       color: green[500],
       position: 'absolute',
       top: '50%',
-      left: '50%',
       marginTop: -12,
-      marginLeft: -12,
     },
 }));
 
@@ -47,7 +45,12 @@ const JoinTripButton = (props) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
-        setStudentId(props.studentId);
+      setStudentId(props.studentId);
+      console.log(`student_${props.studentId}`);
+      let channel = pusher.subscribe(`student_${props.studentId}`);
+      channel.bind('trip_student_join_request', (data)=>{
+        console.log(data);
+      });
     }, [props.studentId]);
 
     useEffect(()=>{
@@ -55,15 +58,18 @@ const JoinTripButton = (props) => {
     }, [props.tripId]);
 
     const requestToJoin = ()=>{
-        console.log(studentId, tripId);
+      axios.post(`http://${process.env.REACT_APP_API_URL}/trips/${tripId}/join/${studentId}`)
+      .then(res=>res.data)
+      .then(data=>{setLoading(true);console.log(data)})
     }
 
     return (
-        <div>
+          <div className={classes.wrapper}>
             <Button onClick={requestToJoin} variant="contained" className={classes.buttonSuccess} disabled={loading}>
-                Join this trip
+              Join this trip
             </Button>
-        </div>
+              {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+          </div>
     );
 }
 

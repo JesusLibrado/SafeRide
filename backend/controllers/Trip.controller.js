@@ -55,17 +55,14 @@ module.exports = {
         }
     },
     requestToJoin: async (req, res, next) => {
-        console.log(req.params);
 
         Trip.findOne({'_id': req.params.trip_id}, (err, trip) => {
-            console.log(trip);
 
             if(err || !trip) {
                 return res.json({error: err, msg: 'Could not find trip'});
             }
 
             Student.findOne({'_id': req.params.student_id}, (err, student) => {
-                console.log(student);
 
                 if(err || !student) {
                     return res.json({error: err, msg: 'Could not find student'});
@@ -81,9 +78,8 @@ module.exports = {
                 }
 
                 // Check if it already exists
-                JoinRequest.findOne({'student': req.params.student_id, 'trip': req.params.trip_id}, (err, joinrequest) => {
+                JoinRequest.findOne({'student': req.params.student_id, 'trip': req.params.trip_id}, async (err, joinrequest) => {
                     if(joinrequest) {
-                        console.log(joinrequest);
                         return res.json(joinrequest);
                     }
 
@@ -96,12 +92,13 @@ module.exports = {
                             status: 'pending'
                         });
 
-                        newJoinRequest.save();
+                        let request_obj = await newJoinRequest.save();
 
                     // Accept/reject via Pusher
-                    pusher.trigger('driver_'+trip.driver, 'trip_driver_join_request', {student: student, trip: trip});
+                    console.log('student_'+req.params.student_id);
+                    console.log('driver_'+trip.driver._id);
+                    pusher.trigger('driver_'+trip.driver, 'trip_driver_join_request', {student: student, trip: trip, request: request_obj});
                     pusher.trigger('student_'+req.params.student_id, 'trip_student_join_request', {msg: 'We are processing your request'});
-                    console.log('driver_'+trip.driver, 'student_'+req.params.student_id);
                     res.json(newJoinRequest);
                     }catch(err){
                         console.log(err);
@@ -127,7 +124,6 @@ module.exports = {
             switch(req.params.action) {
                 case 'accept':
                     Trip.findOne({'_id': joinRequest.trip}, (err, trip) => {
-                        console.log(trip);
             
                         if(err || !trip) {
                             return res.json({error: err, msg: 'Could not find trip'});
