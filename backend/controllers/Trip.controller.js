@@ -6,6 +6,7 @@ const JoinRequest = require('../models/JoinRequest')
 const driverHelper =require('../helpers/driver.helper');
 const stopHelper =require('../helpers/stop.helper');
 const studentHelper=require('../helpers/student.helper');
+const pusher=require('../services/pusher_service');
 
 // Helper function to check if an array of Mongoose ObjectIds contain an element
 function contains(arr, elem) {
@@ -79,29 +80,40 @@ module.exports = {
                     return res.json(trip);
                 }
 
-                try{
-                    let newJoinRequest = new JoinRequest({
-                        driver: trip.driver,
-                        student: req.params.student_id,
-                        status: 'pending'
-                    });
+                // Check if it already exists
+                JoinRequest.findOne({'student': req.params.student_id, 'trip': req.params.trip_id}, (err, joinrequest) => {
+                    if(joinrequest) {
+                        console.log(joinrequest);
+                        return res.json(joinrequest);
+                    }
 
-                    newJoinRequest.save();
+                    // New join request
+                    try{
+                        let newJoinRequest = new JoinRequest({
+                            driver: trip.driver,
+                            student: req.params.student_id,
+                            trip: req.params.trip_id,
+                            status: 'pending'
+                        });
+
+                        newJoinRequest.save();
 
                     // Accept/reject via Pusher
                     pusher.trigger('driver_'+trip.driver, 'trip_driver_join_request', {student: student, trip: trip});
                     pusher.trigger('student_'+req.params.student_id, 'trip_student_join_request', {msg: 'We are processing your request'});
-
+                    console.log('driver_'+trip.driver, 'student_'+req.params.student_id);
                     res.json(newJoinRequest);
-                }catch(err){
-                    res.json({error: err, msg: "New join request declaration was not successful"});
-                }
+                    }catch(err){
+                        console.log(err);
+                        res.json({error: err, msg: "New join request declaration was not successful"});
+                    }
+                });
             });
         });
     },
     joinRequestControl: async (req, res, next) => {
         JoinRequest.findById(req.params.request_id, (err, joinRequest) => {
-            if(err | !joinRequest) {
+            if(err || !joinRequest) {
                 return res.json({error: err, msg: 'Could\'nt find join request'});
             }
 

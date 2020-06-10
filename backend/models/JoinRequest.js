@@ -34,5 +34,16 @@ const newSchema = new mongoose.Schema({
     }
 });
 
+newSchema.index({ trip: 1, student: 1}, { unique: true });
+
 const JoinRequest = mongoose.model('JoinRequest', newSchema);
+JoinRequest.ensureIndexes(function (err) {
+    console.log('Ensure JoinRequest Index');
+    if (err) console.log(err);
+});
+// JoinRequest.on('index', function (err) {
+//     console.log('On index for JoinRequest');
+//     if (err) console.log(err);
+// });
+
 module.exports = JoinRequest;

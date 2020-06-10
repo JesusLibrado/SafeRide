@@ -9,6 +9,6 @@ router.post('/:trip_id/join/:student_id', TripController.requestToJoin);
 
 // Trip join requests
 
-router.post('/trip/joinrequest/:request_id/:action', TripController.joinRequestControl);
+router.post('/joinrequest/:request_id/:action', TripController.joinRequestControl);
 
 module.exports = router; 
