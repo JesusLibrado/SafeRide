@@ -32,7 +32,7 @@ module.exports = {
             .populate('student');
             res.json(driver);
         }catch(err) {
-            res.json({error: err, msg: "Couldn't retrieve driver's university"});
+            res.json({error: err, msg: "Couldn't find driver"});
         }
     },
     getUniversity: async (req, res, next) => {

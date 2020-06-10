@@ -5,6 +5,7 @@ import {
 import axios from 'axios';
 import Map from './Map';
 import JoinTripButton from './JoinTripButton';
+import Driver from './Driver';
 
 const params = {
     viewport: {
@@ -31,6 +32,11 @@ const Trips = (props) => {
         return () => mounted = false;
     }, [trips]);
 
+    // const getUniversityShortName = async (driverId) =>{
+    //     let uniObj = await axios.get(`http://${process.env.REACT_APP_API_URL}/drivers/${driverId}/university`);
+    //     return uniObj.data.shortName;
+    // }
+
     return (
         <div>
             {trips.map((trip)=>
@@ -52,22 +58,21 @@ const Trips = (props) => {
                         <Grid item xs={12} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 <Grid item xs>
+                                    <Driver driverId={trip.driver._id}/>
+
                                     <Typography gutterBottom variant="subtitle1">
-                                    Standard license
+                                        Only {trip.availableSeats} seats avaialable
                                     </Typography>
-                                    <Typography variant="body2" gutterBottom>
-                                    Full resolution 1920x1080 • JPEG
+                                    <Typography variant="body2"  gutterBottom color="textPrimary">
+                                        {trip.driver.plates}
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                    ID: 1030114
-                                    </Typography>
+                                    {/* <Typography gutterBottom variant="body2" color="textSecondary">
+                                        {getUniversityShortName(trip.driver._id)}
+                                    </Typography> */}
                                 </Grid>
                                 <Grid item>
                                     <JoinTripButton studentId={trip.driver.student} tripId={trip.id}/>
                                 </Grid>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="subtitle1">$19.00</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 import MapGL, {Marker} from 'react-map-gl';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {PersonPin} from '@material-ui/icons';
 import Stop from './Stop';
 
+const useStyles = makeStyles((theme) => ({
+    marker: {
+        color: green[500]
+    }
+  }));
+
 const Map = (props) =>{
+    const classes = useStyles();
     const [markers, setMarkers] = useState([]);
     const [viewport, setViewport] = useState({
         latitude: 0,
@@ -42,11 +51,12 @@ const Map = (props) =>{
                     offsetLeft={0} 
                     offsetTop={0}
                 >
-                    <LocationOnIcon/>
+                    <PersonPin className={classes.marker}/>
                 </Marker>
                 {
                     markers.map((marker)=>
                         <Stop
+                            name={marker.name}
                             latitude={marker.latitude} 
                             longitude={marker.longitude}
                             key={marker.name}
