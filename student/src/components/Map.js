@@ -21,7 +21,7 @@ const Map = (props) =>{
     
     useEffect(()=>setViewport(props.viewport), [props.viewport]);
     useEffect(()=>setMe(props.me), [props.me]);
-    useEffect(()=>console.log(markers), [props.Markers]);
+    useEffect(()=>console.log("markers",props.markers), [props.markers]);
 
     const updateViewport = (object) =>{
         setViewport(object);

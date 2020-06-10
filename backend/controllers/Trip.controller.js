@@ -32,8 +32,8 @@ module.exports = {
         let driver_id = await driverHelper.getDriverById(req.body.driver_id, 'id');
         let university = await driverHelper.getDriverUniversity(req.body.driver_id, 'location');
         if(!university) {res.json({error: "University has no location set"}); return;}
+        console.log(university);
         let uni_stop = await stopHelper.getNewStop(university.location, 1);
-        console.log(uni_stop);
         try{
             let newTrip = new Trip({
                 driver: req.body.driver_id,

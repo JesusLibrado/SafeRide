@@ -8,9 +8,11 @@ const Students = ()=>{
     const [students, setStudents] = useState([]);
 
     useEffect(()=>{
+        let mounted = true;
         axios.get(`http://${process.env.REACT_APP_API_URL}/students`)
         .then(res=>res.data)
-        .then(stdnts=>setStudents(stdnts));
+        .then(stdnts=>{if(mounted)setStudents(stdnts)});
+        return () => mounted = false;
     }, [students]);
 
     return(
