@@ -5,6 +5,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Stop from './Stop';
 
 const Map = (props) =>{
+    const [markers, setMarkers] = useState([]);
     const [viewport, setViewport] = useState({
         latitude: 0,
         longitude: 0,
@@ -12,14 +13,15 @@ const Map = (props) =>{
         bearing: 0,
         pitch: 0
     });
-
     const [me, setMe] = useState({
         latitude: 0,
         longitude: 0
     });
+
     
     useEffect(()=>setViewport(props.viewport), [props.viewport]);
     useEffect(()=>setMe(props.me), [props.me]);
+    useEffect(()=>console.log(markers), [props.Markers]);
 
     const updateViewport = (object) =>{
         setViewport(object);
@@ -43,7 +45,7 @@ const Map = (props) =>{
                     <LocationOnIcon/>
                 </Marker>
                 {
-                    [1,2,3].map((n)=>
+                    markers.map((n)=>
                         <Stop
                             latitude={viewport.latitude+(n*0.001)} 
                             longitude={viewport.longitude}
